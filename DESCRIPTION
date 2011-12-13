@@ -1,0 +1,11 @@
+Package: ZeligCommon
+Version: 0.1
+Date: 2011-12-08
+Title: A Zelig Model
+Author: Matt Owen
+Maintainer: Matt Owen <mowen@iq.harvard.edu>
+Depends: Zelig (>= 4.0-6), survival, quantreg
+Description: A Zelig Model
+License: GPL (>=2)
+URL: http://gking.harvard.edu/zelig
+Packaged: Thu Dec 8 11:23:01 2011

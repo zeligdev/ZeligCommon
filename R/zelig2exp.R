@@ -28,10 +28,6 @@ zelig2exp <- function (formula, ..., robust = FALSE, cluster = NULL, data) {
 
 rq.hook <- function (obj, zall, call, se, ...) {
 
-  print(se)
-  print(zall)
-  print(call)
-
   if (missing(se))
     return(obj)
 

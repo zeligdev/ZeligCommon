@@ -1,43 +1,17 @@
 \name{ZeligCommon-package}
+\title{ZeligCommon...}
+\description{ZeligCommon}
+\details{\tabular{ll}{
+Package: \tab ZeligCommon\cr
+Version: \tab 0.1\cr
+Date: \tab 2011-04-25\cr
+Depends: Zelig
+License: \tab GPL version 2 or newer\cr
+}
+
+Edit this description}
 \alias{ZeligCommon-package}
 \alias{ZeligCommon}
 \docType{package}
-\title{
-What the package does (short line)
-~~ package title ~~
-}
-\description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
-}
-\details{
-\tabular{ll}{
-Package: \tab ZeligCommon\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2011-12-08\cr
-License: \tab What license is it under?\cr
-LazyLoad: \tab yes\cr
-}
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
-}
-\author{
-Who wrote it
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
-}
-\references{
-~~ Literature or other references for background information ~~
-}
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
-\keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
-\examples{
-~~ simple examples of the most important functions ~~
-}
+\author{Matt Owen}
+\keyword{package}

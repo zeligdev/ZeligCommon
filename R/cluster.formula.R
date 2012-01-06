@@ -1,21 +1,19 @@
-#
-#
-#
-cluster.formula <- function(formula, cluster) {
-# mf$formula <- update(mf$formula, paste(". ~ . + ", paste("cluster(",mf$cluster,")")))
-# mf$cluster <- NULL
-# } else if (mf$robust)
-# #"
-# mf$formula <- update(formula, paste(". ~ . + ", paste("cluster(1:nrow(",deparse(formula[[2]]),"))")))
+#' Generate Formulae that Consider Clustering
+#'
+#' This method is used internally by the "ZeligCommon" Package to interpret
+#' clustering.
+cluster.formula <- function (formula, cluster) { 
 
+  # Convert LHS of formula to a string
   lhs <- deparse(formula[[2]])
 
-  new.formula <- ". ~ . + "
-  cluster.part <- "cluster(1:nrow(%s))"
-  cluster.part <- sprintf(cluster.part, deparse(formula[[2]]))
+  cluster.part <- if (is.null(cluster))
+    # NULL values require
+    sprintf("cluster(1:nrow(%s))", lhs)
 
+  else
+    # Otherwise we trust user input
+    sprintf("cluster(%s)", cluster)
 
-
-
-  formula
+  update(formula, paste(". ~ .", cluster.part, sep=" + "))
 }

@@ -6,8 +6,12 @@
 #' @return a list specifying link, link-inverse, random samples, and ancillary parameters
 #' @export
 param.tobit <- function(obj, num=1000, ...) {
+  cov <- vcov(obj)
+  mu <- c(coef(obj), log(obj$result$scale))
+
+  # Return
   list(
-       coef = NULL,
+       coef = mvrnorm(num, mu=mu, Sigma=cov),
        linkinv = NULL
        )
 }

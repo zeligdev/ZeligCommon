@@ -13,16 +13,20 @@ zelig2tobit <- function (
                          data
                          ) {
 
+  if (!(is.null(cluster) || robust))
+    stop("If cluster is specified, then `robust` must be TRUE")
 
-  #
-  formula <- cluster.formula(formula, cluster)
+  # Add cluster term
+  if (robust || !is.null(cluster))
+    formula <- cluster.formula(formula, cluster)
 
-  # 
+  # Make surv demands that the model 
   formula <- make.surv(formula, below, above)
-
+  formula <- cluster.formula(formula, cluster)
 
   list(
        .function = "survreg",
+
        formula = formula,
        dist = "gaussian",
        data = data,
@@ -37,7 +41,7 @@ make.surv <- function (formula, below, above) {
 
   lhs <- formula[[2]]
 
-  if (!grepl("Surv", as.character(lhs)))
+  if (grepl("Surv", as.character(lhs)))
     return(formula)
 
   if (!(is.numeric(below) && is.numeric(above))) {
@@ -46,8 +50,10 @@ make.surv <- function (formula, below, above) {
     return(formula)
   }
 
-  if (above == Inf)
-    tt <- "left"
+  if (above == Inf) {
+    # Empty?
+    # This seems like a mistake inherited from old code
+  }
 
   else if (below == -Inf && above == Inf)
     stop("This model does not support censoring. Try the \"normal\" model")
@@ -59,9 +65,10 @@ make.surv <- function (formula, below, above) {
     stop("This model does not support interval-censored data")
 
   # That is, this model only supports left-censored data
-
+  # Surv( <outcome> , <below> < <outcomes> )
   lhs <- call("Surv", lhs, call("<", below, lhs), type="left")
 
+  # Place back within formula
   formula[[2]] <- lhs
 
   # Return

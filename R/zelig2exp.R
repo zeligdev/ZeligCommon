@@ -10,12 +10,13 @@ zelig2exp <- function (formula, ..., robust = FALSE, cluster = NULL, data) {
   if (!(is.null(cluster) || robust))
     stop("If cluster is specified, then `robust` must be TRUE")
 
-  formula <- cluster.formula(formula, cluster)
+  # Add cluster term
+  if (robust || !is.null(cluster))
+    formula <- cluster.formula(formula, cluster)
 
   # Return
   list(
        .function = "survreg",
-       .hook = "rq.hook",
 
        formula = formula,
        dist = "exponential",
@@ -25,14 +26,6 @@ zelig2exp <- function (formula, ..., robust = FALSE, cluster = NULL, data) {
        )
 }
 
-
-rq.hook <- function (obj, zall, call, se, ...) {
-
-  if (missing(se))
-    return(obj)
-
-  obj
-}
 
 stratify.rqs <- function (obj) {
   x <- vector("list", length(obj$tau))
